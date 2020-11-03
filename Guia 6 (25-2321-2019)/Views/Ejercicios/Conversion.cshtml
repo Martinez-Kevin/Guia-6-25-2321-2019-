@@ -1,0 +1,41 @@
+﻿@using Guia_6__25_2321_2019_.Models
+@model conversion
+
+@{
+    ViewBag.Title = "Conversion";
+}
+
+<h2>Conversion de grados, peso y longitud</h2>
+
+@using (Html.BeginForm())
+
+{
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.Label("Medida: ", new { @class = "control-label" })
+            <br />Valores en decimal se separan por coma Ejemplo: (5,2)<br />
+            @Html.TextBoxFor(Model => Model.medida, new { @class = "form-control"})
+        </div>
+        <div class="form-group">
+            @Html.Label("Tipo de conversion: ", new { @class = "control-label" })
+            @Html.DropDownListFor(Model => Model.mg,
+                           new SelectList(Enum.GetValues(typeof(Magnitudes))), new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Unidad de medida: ", new { @class = "control-label" })
+            @Html.DropDownListFor(Model => Model.conver,
+                           new SelectList(Enum.GetValues(typeof(TipoConver))), new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="CONVERTIR" class="btn btn-success" />
+        </div>
+        <br /><br />
+        if (ViewBag.resultado != null)
+        {
+            <p class="h3 text-success">Resultado de la conversion:&nbsp;@ViewBag.resultado</p>
+
+        }
+
+}

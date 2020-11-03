@@ -1,0 +1,42 @@
+﻿@using Guia_6__25_2321_2019_.Models
+@model calculo_operaciones
+
+
+@{
+    ViewBag.Title = "Operaciones";
+}
+
+<h2>Operaciones</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.Label("Numero 1", new { @class="control-label"})
+        @Html.TextBoxFor(Model => Model.num1, new { @class="form-control", type="number"})
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Numero 2", new { @class = "control-label" })
+        @Html.TextBoxFor(Model => Model.num2, new { @class = "form-control", type = "number" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Operacion", new { @class = "control-label" })
+        @Html.DropDownListFor(Model => Model.op,
+                              new SelectList(Enum.GetValues(typeof(Operaciones))), new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="CALCULAR" class="btn btn-success" />
+    </div>
+    <br /><br />
+    if (ViewBag.resultado != null)
+    {
+        <p class="h3 text-success">Resultado operacion:&nbsp;@ViewBag.resultado</p>
+        <p class="h3 text-danger">@ViewBag.e</p>
+
+    }
+
+}
